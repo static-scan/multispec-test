@@ -1,0 +1,58 @@
+openapi: 3.0.1
+info:
+  title: Payments API for Mazinger
+  description: New Payments Sock Shop API
+  version: '1.0'
+servers:
+  - url: http://payment.sock-shop
+paths:
+  /paymentAuth:
+    post:
+      tags:
+      - payments
+      summary: Payment Authorization
+      description: Authorizes a payment when the custom inputs the card details
+      operationId: 3fe7797a-358a-48ff-9b04-b3d9bef5a15d
+      requestBody:
+        description: Generic request body
+        content:
+          application/json:
+            schema:
+              $ref: ''
+            example:
+              address:
+                city: Glasgow
+                country: United Kingdom
+                number: '246'
+                postcode: G67 3DL
+                street: Whitelees Road
+              amount: 18.99
+              card:
+                ccv: '958'
+                expires: 08/19
+                longNum: '5544154011345918'
+        required: true
+      responses:
+        '200':
+          description: Successful call with status 200
+          content:
+            application/json:
+              example:
+                authorised: true
+                message: Payment authorised
+        '400':
+          description: Failed call with status 400
+          content:
+            application/json:
+              example:
+                error: Internal Server Error
+                message: Payment failed. Please verify card details
+                path: "/paymentAuth"
+        '500':
+          description: Failed call with status 500
+          content:
+            application/json:
+              example:
+                error: Internal Server Error
+                message: Unable to create order due to unspecified IO error
+                path: "/paymentAuth"

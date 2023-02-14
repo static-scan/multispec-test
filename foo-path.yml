@@ -1,0 +1,13 @@
+parameters:
+  - $ref: number.yml
+get:
+  responses:
+    "200":
+      description: fooPathDesc-change-1
+      content:
+        application/json:
+          schema:
+            type: object
+            properties:
+              foo2:
+                $ref: openapi.yml#/components/schemas/Foo2
